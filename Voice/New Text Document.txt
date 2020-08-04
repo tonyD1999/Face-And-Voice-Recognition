@@ -1,0 +1,91 @@
+
+# Data
+Drive folder consists of face pictures (100 pictures/person) , voices (3 records/person) and augment-voices:
+```sh
+https://drive.google.com/drive/folders/10WNFsQ3HEmw85ib2IarELRjeKVufizjL?usp=sharing
+```
+
+# Face
+### 1.Capture Face:
+```sh
+python record_face.py -n name -c 100
+```
+- -n: input your name or ids
+- -c : number of faces it will capture
+
+Our recognition model is 1:N (N is larger than 1) so you should record 2 or more people.
+### 2.Encode faces to 128 dimensions-vector:
+```sh
+python encode_face.py
+```
+### 3.Train your models:
+```sh
+python train_faces.py
+```
+
+### 4.Run face recognition demo:
+```sh
+python face_recognition.py
+```
+
+# Voice
+### 1.Choose your mic:
+```sh
+python testmic.py
+```
+It will show available mics in your computer:
+```sh
+Input Device id  0  -  Microsoft Sound Mapper - Input
+Input Device id  1  -  Microphone Array (Realtek High
+Input Device id  2  -  Stereo Mix (Realtek High Defini
+Input Device id  3  -  Microphone (DroidCam Virtual Au
+```
+Then choose your mic id.
+
+### 2.Record voice:
+Default mic:
+```sh
+python record.py -n name -c 3
+```
+With your chosen mic:
+```sh
+python record.py -n name -c 3 -m 1
+```
+- -n : input your name or id
+- -c : number of records it will record
+- -m : input your mic id , for example 1, which is Microphone Array
+
+It will record your voice. In this step, you should say your name (e.g Nguyen Sy Duc).
+Our recognition model is 1:N (N is larger than 1) so you should record 2 or more people.
+### 3.Make your records longer:
+```sh
+python make_more.py
+```
+It will merge your records to make them longer which will make model perform well because of our model works well on 5s to 30s record.
+
+### 4.Encode your voice to 256 dimensions-vector:
+```sh
+python encode.py
+```
+### 5.Train your models:
+```sh
+python train.py
+```
+### 6.Run voice recognition demo:
+Default mic:
+```sh
+python main.py
+```
+With your chosen mic:
+```sh
+python main.py -m 1
+```
+You should choose the same mic which you used to record voices.
+
+#### Note:
+- if you want to train on new data, you should clear data folder and remove all pickle files
+
+
+
+
+
